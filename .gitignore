@@ -1,0 +1,5 @@
+build.sh
+run.sh
+*.pyc
+*.swp
+*__pycache__*
