@@ -71,7 +71,8 @@ def get_container_arn():
     if getenv('TESTING'):
         return SAMPLE_RESPONSE['TaskARN']
     else:
-        return loads(get(getenv('ECS_CONTAINER_METADATA_URI_V4')).text)['TaskARN']
+        _url = "{}/task".format(getenv('ECS_CONTAINER_METADATA_URI_V4'))
+        return loads(get(_url).text)['TaskARN']
     
 
 @app.route('/')
