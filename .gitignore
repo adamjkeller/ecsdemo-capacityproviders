@@ -3,3 +3,5 @@ run.sh
 *.pyc
 *.swp
 *__pycache__*
+cdk.out
+cdk.context.json

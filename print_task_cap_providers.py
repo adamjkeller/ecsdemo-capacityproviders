@@ -78,7 +78,9 @@ def get_container_arn():
 def print_tasks_cap_prov_strategy():
     c = boto3.client('ecs')
     arns = c.list_tasks(cluster='container-demo')['taskArns']
+    print(arns)
     all_tasks = c.describe_tasks(cluster='container-demo', tasks=arns)['tasks']
+    print(all_tasks)
     results = {x['taskArn']: x['capacityProviderName'] for x in all_tasks}
     my_arn = get_container_arn()
     my_strategy = results[my_arn]
