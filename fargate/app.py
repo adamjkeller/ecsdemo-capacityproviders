@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# cdk: 1.25.0
+# cdk: 1.41.0
 from aws_cdk import (
     aws_ec2,
     aws_ecs,

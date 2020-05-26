@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-ecs-cli compose service create [--deployment-max-percent n] [--deployment-min-healthy-percent n] [--load-balancer-name value|--target-group-arn value] [--container-name value] [--container-port value] [--role value] [--launch-type launch_type] [--health-check-grace-period integer] [--create-log-groups] [--enable-service-discovery] [--vpc value] [--private-dns-namespace value] [--private-dns-namespace-id value] [--public-dns-namespace value] [--public-dns-namespace-id value] [--sd-container-name value] [--sd-container-port value] [--dns-ttl value] [--dns-type value] [--healthcheck-custom-config-failure-threshold value] [--scheduling-strategy value] [--tags key1=value1,key2=value2] [--disable-ecs-managed-tags] [--help]
