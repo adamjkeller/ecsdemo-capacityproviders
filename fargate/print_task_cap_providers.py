@@ -20,7 +20,7 @@ def print_tasks_cap_prov_strategy():
     print(arns)
     all_tasks = c.describe_tasks(cluster='container-demo', tasks=arns)['tasks']
     print(all_tasks)
-    results = {x['taskArn']: x['capacityProviderName'] for x in all_tasks}
+    results = {x.get('taskArn'): x.get('capacityProviderName', "NON_DEFAULT") for x in all_tasks}
     my_arn = get_container_arn()
     my_strategy = results[my_arn]
     final_json = {
