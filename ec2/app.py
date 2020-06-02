@@ -35,20 +35,12 @@ class BasePlatform(core.Construct):
         
         # If using EC2 backed, this will take all security groups assigned to the cluster nodes and create a list
         # This list will be used when importing the cluster
-        #cluster_sec_grps = list()
-        #cluster_output_sec_grp = core.Fn.import_value('ECSSecGrpList').split(',')
-        #for sec_grp in cluster_output_sec_grp:
-        #    cluster_sec_grps.append(
-        #        aws_ec2.SecurityGroup.from_security_group_id(
-        #            self, "ClusterSecGrp",
-        #            security_group_id=sec_grp
-        #        )
-        #    )
+        cluster_output_sec_grp = core.Fn.import_value('ECSSecGrpList')
         
         self.ecs_cluster = aws_ecs.Cluster.from_cluster_attributes(
             self, "ECSCluster",
             cluster_name=core.Fn.import_value('ECSClusterName'),
-            security_groups=[aws_ec2.SecurityGroup.from_security_group_id(self, "ClusterSecGrp", "sg-02b77cca9cf03d9d8")],
+            security_groups=[aws_ec2.SecurityGroup.from_security_group_id(self, "ClusterSecGrp", cluster_output_sec_grp)],
             vpc=self.vpc,
             default_cloud_map_namespace=self.sd_namespace
         )
