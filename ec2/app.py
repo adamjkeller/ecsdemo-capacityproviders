@@ -73,6 +73,16 @@ class CapacityProviderEC2Service(core.Stack):
             task_image_options=self.task_image,
         )
         
+        # Update Target group settings for Spot instances to adjust deregistration delay to less than 120 sec.
+        # Adjust healthy threshold  to 2 to reduce the time for a new task to be healthy in 1 minute
+        
+        self.cfn_target_group = self.load_balanced_service.node.find_child('LB'
+                                ).node.find_child('PublicListener'
+                                ).node.find_child('ECSGroup'
+                                ).node.default_child
+        self.cfn_target_group.target_group_attributes = [{ "key" : "deregistration_delay.timeout_seconds", "value": "90" }]
+        self.cfn_target_group.healthy_threshold_count = 2
+
         # This should work, but the default child is not the service cfn, it's a list of cfn service and sec group
         #self.cfn_resource = self.load_balanced_service.service.node.default_child
         self.cfn_resource = self.load_balanced_service.service.node.children[0]
